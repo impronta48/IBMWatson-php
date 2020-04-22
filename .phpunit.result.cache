@@ -1,0 +1,1 @@
+C:37:"PHPUnit\Runner\DefaultTestResultCache":242:{a:2:{s:7:"defects";a:2:{s:36:"IBMWatsonTest::testCanTranslateHallo";i:4;s:37:"IBMWatsonTest::testCanIdentifyItalian";i:4;}s:5:"times";a:2:{s:36:"IBMWatsonTest::testCanTranslateHallo";d:0.017;s:37:"IBMWatsonTest::testCanIdentifyItalian";d:0;}}}
