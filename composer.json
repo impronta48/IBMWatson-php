@@ -23,14 +23,14 @@
         "phpstan/phpstan": "^0.12"
     },
     "autoload": {
-        "files": [
-            "settings.php"
-        ],
         "psr-4": {
             "impronta48\\": "src/"
         }
     },
     "autoload-dev": {
+	    "files": [
+            "tests/settings.php"
+        ],
         "psr-4": {
             "impronta48\\Test\\": "tests/"
         }
