@@ -97,7 +97,7 @@ class IBMWatson
             //Quando la traduzione è pronta la scarico al posto giusto e restituisco il nome
             return $this->downloadTranslation($docId, $target);
         } else {
-            throw Exception($response->getReasonPhrase());
+            throw new \Exception($response->getReasonPhrase());
         }
     }
 
@@ -121,7 +121,7 @@ class IBMWatson
                 $result = json_decode($response->getBody()->getContents());
                 $status = $result->status;
                 if ($status == 'failed') {
-                    throw Exception('Cannot translate this document');
+                    throw new \Exception('Cannot translate this document, because: ' . $result->error);
                 }
                 if ($status != 'available') {
                     //Aspetta 20 centesimi di secondo prima di fare un'altra chiamata
@@ -162,7 +162,7 @@ class IBMWatson
 
             return $resource;
         } else {
-            throw Exception($response->getReasonPhrase());
+            throw new \Exception($response->getReasonPhrase());
         }
     }
 
@@ -211,7 +211,7 @@ class IBMWatson
     public function identifyLanguage(string $data): string
     {
         if (!is_string($data)) {
-            throw Exception('Data must be a string');
+            throw  new \Exception('Data must be a string');
         }
 
         $response = $this->client->post(
