@@ -28,9 +28,6 @@
         }
     },
     "autoload-dev": {
-	    "files": [
-            "tests/settings.php"
-        ],
         "psr-4": {
             "impronta48\\Test\\": "tests/"
         }
