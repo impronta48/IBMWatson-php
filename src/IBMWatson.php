@@ -36,7 +36,10 @@ class IBMWatson
         $this->$apikey = $apikey;
         $this->url = $url;
         //We use Guzzle to create a default auth, valid for every call
-        $this->client = new \GuzzleHttp\Client(['auth' => ['apikey', $apikey]]);
+        $this->client = new \GuzzleHttp\Client([
+            'base_uri' =>  $url, 
+            'auth' => ['apikey', $apikey]
+        ]);
     }
 
     /**
@@ -81,7 +84,7 @@ class IBMWatson
 
         //Con questa chiamata invio il documento a IBM
         $response = $this->client->post(
-            $this->url . '/v3/documents?version=2018-05-01',
+            '/v3/documents?version=2018-05-01',
             [
                 'multipart' => $form_data,
             ]
@@ -115,7 +118,7 @@ class IBMWatson
     {
         //Polling finchè la risorsa non è pronta o fallisce la traduzione
         do {
-            $response = $this->client->get($this->url . "/v3/documents/$docId?version=2018-05-01");
+            $response = $this->client->get("/v3/documents/$docId?version=2018-05-01");
 
             if ($response->getStatusCode() == 200) {
                 $result = json_decode($response->getBody()->getContents());
@@ -145,7 +148,7 @@ class IBMWatson
     {
         //Non scarico il documento per non avere problemi di dimensioni del file, ma genero uno stream
         $response = $this->client->get(
-            $this->url . "/v3/documents/$docId/translated_document?version=2018-05-01",
+            "/v3/documents/$docId/translated_document?version=2018-05-01",
             [
                 'stream' => true,
             ]
@@ -187,7 +190,7 @@ class IBMWatson
                 'target' => $target,
             ];
             $response = $this->client->post(
-                $this->url . '/v3/translate?version=2018-05-01',
+                '/v3/translate?version=2018-05-01',
                 [
                     'headers' => ['Content-Type' => 'application/json'],
                     'body' => json_encode($data),
@@ -215,7 +218,7 @@ class IBMWatson
         }
 
         $response = $this->client->post(
-            $this->url . '/v3/identify?version=2018-05-01',
+            '/v3/identify?version=2018-05-01',
             [
               'headers' => ['Content-Type' => 'text/plain'],
               'body' => $data,
