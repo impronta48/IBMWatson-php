@@ -14,11 +14,12 @@ use GuzzleHttp\Psr7\Request;
  * @version v1.0.0  Wednesday, April 22nd, 2020.
  * @global
  */
+#[\AllowDynamicProperties]
 class IBMWatson
 {
-    private $apikey;
-    private $url;
-    private $http;
+    private string $apikey;
+    private string $url;
+    private \GuzzleHttp\Client $client;
 
     /**
      * __construct.
