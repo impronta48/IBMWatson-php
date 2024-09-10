@@ -19,7 +19,7 @@ class IBMWatson
 {
     private string $apikey;
     private string $url;
-    private \GuzzleHttp\Client $client;
+    private $client;
 
     /**
      * __construct.
@@ -34,7 +34,7 @@ class IBMWatson
      */
     public function __construct($apikey, $url)
     {
-        $this->$apikey = $apikey;
+        $this->apikey = $apikey;
         $this->url = $url;
         //We use Guzzle to create a default auth, valid for every call
         $this->client = new \GuzzleHttp\Client([
